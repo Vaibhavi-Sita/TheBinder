@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: rc4-app
+    runtime: docker
+    plan: free
+    env: docker
+    buildCommand: docker build -t rc4-app .
+    startCommand: docker run -p 10000:8080 rc4-apps
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: SERVER_PORT
+        value: 8080
