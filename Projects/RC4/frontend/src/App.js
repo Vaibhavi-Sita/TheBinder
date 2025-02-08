@@ -8,15 +8,13 @@ function App() {
   const [ciphertext, setCiphertext] = useState('')
   const [decryptedText, setDecryptedText] = useState('')
 
+  const apiUrl = process.env.REACT_APP_API_URL
+
   const handleEncrypt = async () => {
     try {
-      const response = await axios.post(
-        'http://localhost:8080/api/rc4/encrypt',
-        null,
-        {
-          params: { plaintext, key },
-        }
-      )
+      const response = await axios.post(`${apiUrl}/api/rc4/encrypt`, null, {
+        params: { plaintext, key },
+      })
       setCiphertext(response.data)
     } catch (error) {
       console.error('Error encrypting:', error)
@@ -25,13 +23,9 @@ function App() {
 
   const handleDecrypt = async () => {
     try {
-      const response = await axios.post(
-        'http://localhost:8080/api/rc4/decrypt',
-        null,
-        {
-          params: { ciphertext, key },
-        }
-      )
+      const response = await axios.post(`${apiUrl}/api/rc4/decrypt`, null, {
+        params: { ciphertext, key },
+      })
       setDecryptedText(response.data)
     } catch (error) {
       console.error('Error decrypting:', error)
