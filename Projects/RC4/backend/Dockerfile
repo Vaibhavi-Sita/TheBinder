@@ -1,18 +1,17 @@
-# Use an official OpenJDK runtime with Java 21 as a parent image
-FROM openjdk:21-jdk-slim
+FROM maven:3.9.8-eclipse-temurin-21 AS build
 
-# Set the working directory
+COPY src /app/src
+
+COPY pom.xml /app
+
 WORKDIR /app
 
-COPY src ./src
-COPY pom.xml ./pom.xml
-RUN ./mvnw clean package
+RUN mvn clean install -U
 
-# Copy the JAR file into the container
-#COPY target/rc4-0.0.1-SNAPSHOT.jar app.jar
+FROM openjdk:21-jdk-slim
 
-# Expose the port your app runs on
+COPY --from=build /app/target/rc4-0.0.1-SNAPSHOT.jar /app/app.jar
+
 EXPOSE 8080
 
-# Run the application
-CMD ["java", "-jar", "target/rc4-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "/app/app.jar"]

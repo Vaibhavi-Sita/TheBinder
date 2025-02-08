@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import java.util.Base64;
 
 @Service
-public class -RC4Service {
+public class RC4Service {
 
     public String encrypt(String plaintext, String key) {
         byte[] encryptedBytes = rc4(plaintext.getBytes(), key.getBytes());
