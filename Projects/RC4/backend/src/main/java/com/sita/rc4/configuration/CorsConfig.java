@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Configuration
 public class CorsConfig {
 
@@ -13,11 +16,14 @@ public class CorsConfig {
     private String allowedOrigins;
     @Bean
     public WebMvcConfigurer corsConfigurer() {
+        //List<String> allowedOrigins = Arrays.asList("http://localhost:3000/","https://react-frontend-29tk.onrender.com/");
+
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // Allow all endpoints
-                        .allowedOrigins("https://react-frontend-29tk.onrender.com/") // Allow requests from this origin
+                        //.allowedOrigins(String.valueOf(allowedOrigins)) // Allow requests from this origin
+                        .allowedOrigins("http://localhost:3000/","https://react-frontend-29tk.onrender.com/") // Allow requests from this origin
                         .allowedMethods("GET", "POST", "PUT", "DELETE") // Allow these HTTP methods
                         .allowedHeaders("*") // Allow all headers
                         .allowCredentials(true); // Allow cookies and credentials
