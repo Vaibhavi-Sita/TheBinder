@@ -1,33 +1,17 @@
-// src/App.js
 import React from 'react'
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
-import TwoSum from './components/TwoSum'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import MenteeApplicationPage from './pages/MenteeApplicationPage'
+import HomePage from './pages/HomePage'
 
-function App() {
+const App = () => {
   return (
     <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to='/'>Home</Link>
-            </li>
-            <li>
-              <Link to='/two-sum'>Two Sum</Link>
-            </li>
-          </ul>
-        </nav>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/two-sum' element={<TwoSum />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/mentee-application' element={<MenteeApplicationPage />} />
+      </Routes>
     </Router>
   )
-}
-
-function Home() {
-  return <h1>Welcome to LeetCode Visualizer!</h1>
 }
 
 export default App
